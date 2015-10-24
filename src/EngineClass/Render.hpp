@@ -14,6 +14,11 @@
 			std::string toString(void) const;
 			void		RunState(Application & app, e_state	& currentState);
 
+			
+			// tmp
+			GLuint VBO;
+
+
 		private:
 			
 			Render &operator=(Render const &rhs);

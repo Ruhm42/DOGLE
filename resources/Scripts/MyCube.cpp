@@ -15,7 +15,7 @@ class MyCube : public Script
 
 		void			Update()
 		{
-			transform->rotation += glm::vec3(0, 0.002, 0);
+			//transform->rotation += glm::vec3(0, 0.002, 0);
 		}
 
 		void			OnStop()

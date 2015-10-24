@@ -95,7 +95,8 @@ void			Engine::_StartOpenGL(void)
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	// window and GLFW context
-	if ((_window = glfwCreateWindow(_winW, _winH, _app->name.c_str(), nullptr, nullptr)) == nullptr)
+	//if ((_window = glfwCreateWindow(_winW, _winH, _app->name.c_str(), nullptr, nullptr)) == nullptr)
+	if ((_window = glfwCreateWindow(200, 200, "test", nullptr, nullptr)) == nullptr)
 	{
 		glfwTerminate();
 		throw DError() << msg("glfw could not open window");

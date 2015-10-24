@@ -16,6 +16,9 @@ SRC +=	src/BuilderClass/ScriptFactory.cpp \
 		src/BuilderClass/Builder.cpp \
 
 SRC +=	src/UtilsClass/RGB.cpp \
+		src/UtilsClass/math_3d.cpp \
+		src/UtilsClass/camera.cpp \
+		src/UtilsClass/pipeline.cpp \
 
 SRC +=	src/EngineClass/Engine.cpp \
 		src/EngineClass/StateMachine.cpp \

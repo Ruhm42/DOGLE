@@ -24,7 +24,7 @@ IState	*StateMachine::_states[] =
 
 // CONSTRUCTOR DESTRUCTOR //
 
-StateMachine::StateMachine(void) :	_currentState(STATE_START)
+StateMachine::StateMachine(void) :	_currentState(STATE_RENDER)
 {
 }
 

@@ -19,6 +19,10 @@
 
 			static Engine*	singleton;
 			bool			pause;
+			
+
+			void			_StartOpenGL(void);
+			GLFWwindow		*_window;
 
 		protected:
 	
@@ -34,8 +38,6 @@
 			int				_winW;
 			int				_winH;
 			bool			_setupOpenGL;
-			GLFWwindow		*_window;
-			void			_StartOpenGL(void);
 			void			_StopOpenGL(void);
 
 			// Opengl settings

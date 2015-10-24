@@ -16,6 +16,8 @@
 # include <utility>
 # include <vector>
 
+# include "ogldev_math_3d.h"
+# include "ogldev_util.h"
 # include "glm/glm.hpp"
 # include "glm/gtc/matrix_transform.hpp"
 # include "glm/gtc/type_ptr.hpp"

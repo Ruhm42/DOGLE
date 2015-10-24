@@ -36,7 +36,7 @@
 			void		_ParseSkin(std::string& line);
 
 			std::string*	_GetAttributs(std::string& line, int count);
-			glm::vec3		_AttributToVec3(std::string& attribut);
+			Vector3f		_AttributToVec3(std::string& attribut);
 
 			Application*	_app;
 			Scene*			_scene;

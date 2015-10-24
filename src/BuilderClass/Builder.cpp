@@ -187,9 +187,9 @@ std::string*	Builder::_GetAttributs(std::string& line, int count)
 	return attributs;
 }
 
-glm::vec3		Builder::_AttributToVec3(std::string& attribut)
+Vector3f		Builder::_AttributToVec3(std::string& attribut)
 {
-	glm::vec3	vector;
+	Vector3f	vector;
 	std::istringstream ss(attribut);
 	std::string	value[3];
 

@@ -6,12 +6,12 @@
 Transform::Transform()
 {
 	std::cout << "construct Transform " << std::endl;
-	position = glm::vec3(0.0, 0.0, 0.0);
-	rotation = glm::vec3(0.0f);
-	scale = glm::vec3(1.0f);
+	position = Vector3f(0.0, 0.0, 0.0);
+	rotation = Vector3f(0.0f);
+	scale = Vector3f(1.0f);
 }
 
-Transform::Transform(glm::vec3 pos, glm::vec3 rot, glm::vec3 sc)
+Transform::Transform(Vector3f pos, Vector3f rot, Vector3f sc)
 {
 	position = pos;
 	rotation = rot;
@@ -50,24 +50,24 @@ std::ostream	&operator<<(std::ostream & o, Transform const & rhs)
 
 void			Transform::CalculateTransform()
 { 
-	_local = glm::mat4(1.0);
-	_local = glm::rotate(_local, rotation.x, glm::vec3(1.0f, 0.0f, 0.0f));
-	_local = glm::rotate(_local, rotation.y, glm::vec3(0.0f, 1.0f, 0.0f));
-	_local = glm::rotate(_local, rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
-   	_local = glm::scale(_local, scale);
+	// _local = Matrix4f(1.0);
+	// _local = glm::rotate(_local, rotation.x, Vector3f(1.0f, 0.0f, 0.0f));
+	// _local = glm::rotate(_local, rotation.y, Vector3f(0.0f, 1.0f, 0.0f));
+	// _local = glm::rotate(_local, rotation.z, Vector3f(0.0f, 0.0f, 1.0f));
+ //   	_local = glm::scale(_local, scale);
 
-   	_world = glm::mat4(1.0);
-    _world = glm::translate(_world, position);
-	_transform = _world * _local;
+ //   	_world = Matrix4f(1.0);
+ //    _world = glm::translate(_world, position);
+	// _transform = _world * _local;
 }
 
 std::string		Transform::toString(void) const
 {
 	std::stringstream ss;
-	ss 	<< "# Component Transform #" << std::endl;
-	ss	<< "Position(" << position.x << "," << position.y << "," << position.z << ")" << std::endl;
-	ss	<< "Rotation (" << rotation.x << "," << rotation.y << "," << rotation.z << ")" << std::endl;
-	ss	<< "Scale (" << scale.x << "," << scale.y << "," << scale.z << ")" << std::endl;
+	// ss 	<< "# Component Transform #" << std::endl;
+	// ss	<< "Position(" << position.x << "," << position.y << "," << position.z << ")" << std::endl;
+	// ss	<< "Rotation (" << rotation.x << "," << rotation.y << "," << rotation.z << ")" << std::endl;
+	// ss	<< "Scale (" << scale.x << "," << scale.y << "," << scale.z << ")" << std::endl;
 	return ss.str();
 }
 
@@ -89,7 +89,7 @@ void			Transform::Save(std::ofstream &file)
 
 // GETTER SETTER //
 
-glm::mat4		Transform::GetMatrice() 
+Matrix4f		Transform::GetMatrice() 
 { 
 	CalculateTransform();
 	return _transform; 

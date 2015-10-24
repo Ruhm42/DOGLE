@@ -12,7 +12,7 @@
 
 			void			Awake()
 			{
-				transform->position +=  glm::vec3(0,0,-3);
+				//transform->position +=  glm::vec3(0,0,-3);
 			}
 	
 			void			Update()
@@ -30,18 +30,18 @@
 
 			void			Navigation()
 			{
-				if (Inputs::singleton->KeyPressed(GLFW_KEY_A))
-					transform->position += glm::vec3(0.05, 0, 0);
-				if (Inputs::singleton->KeyPressed(GLFW_KEY_D))
-					transform->position -= glm::vec3(0.05, 0, 0);
-				if (Inputs::singleton->KeyPressed(GLFW_KEY_W))
-					transform->position += glm::vec3(0.0, 0.0, 0.05);
-				if (Inputs::singleton->KeyPressed(GLFW_KEY_S))
-					transform->position -= glm::vec3(0.0, 0.0, 0.05);
-				if (Inputs::singleton->KeyPressed(GLFW_KEY_SPACE))
-					transform->position -= glm::vec3(0.0, 0.05, 0.0);
-				if (Inputs::singleton->KeyPressed(GLFW_KEY_LEFT_CONTROL))
-					transform->position += glm::vec3(0.0, 0.05, 0.0);
+				// if (Inputs::singleton->KeyPressed(GLFW_KEY_A))
+				// 	transform->position += glm::vec3(0.05, 0, 0);
+				// if (Inputs::singleton->KeyPressed(GLFW_KEY_D))
+				// 	transform->position -= glm::vec3(0.05, 0, 0);
+				// if (Inputs::singleton->KeyPressed(GLFW_KEY_W))
+				// 	transform->position += glm::vec3(0.0, 0.0, 0.05);
+				// if (Inputs::singleton->KeyPressed(GLFW_KEY_S))
+				// 	transform->position -= glm::vec3(0.0, 0.0, 0.05);
+				// if (Inputs::singleton->KeyPressed(GLFW_KEY_SPACE))
+				// 	transform->position -= glm::vec3(0.0, 0.05, 0.0);
+				// if (Inputs::singleton->KeyPressed(GLFW_KEY_LEFT_CONTROL))
+				// 	transform->position += glm::vec3(0.0, 0.05, 0.0);
 			}
 
 			void			PopCube()
