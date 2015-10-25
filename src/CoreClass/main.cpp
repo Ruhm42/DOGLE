@@ -3,12 +3,16 @@
 #include "Builder.hpp"
 #include "ogldev_pipeline.h"
 
+#define WINDOW_WIDTH 1024
+#define WINDOW_HEIGHT 768
 
 GLuint VBO;
 GLuint VAO;
 GLuint IBO;
-GLuint gWorldLocation;
+GLuint gWVPLocation;
+
 PersProjInfo gPersProjInfo;
+Cam* pGameCamera = NULL;
 
 const char* pVSFileName = "shader.vs";
 const char* pFSFileName = "shader.fs";
@@ -24,10 +28,14 @@ void RenderSceneCB(GLFWwindow *_window)
 
     Pipeline p;
     p.Rotate(0.0f, Scale, 0.0f);
-    p.WorldPos(0.0f, 0.0f, 5.0f);
+    p.WorldPos(0.0f, 0.0f, 3.0f);
+    Vector3f CameraPos(0.0f, 0.0f, -3.0f);
+    Vector3f CameraTarget(0.0f, 0.0f, 2.0f);
+    Vector3f CameraUp(0.0f, 1.0f, 0.0f);
+    p.SetCamera(*pGameCamera);
     p.SetPerspectiveProj(gPersProjInfo);
 
-    glUniformMatrix4fv(gWorldLocation, 1, GL_TRUE, (const GLfloat*)p.GetWPTrans());
+    glUniformMatrix4fv(gWVPLocation, 1, GL_TRUE, (const GLfloat*)p.GetWVPTrans());
     
     glBindVertexArray (VAO);
     glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
@@ -42,9 +50,6 @@ void CreateVertexBuffer()
     Vertices[1] = Vector3f(0.0f, -1.0f, -1.15475f);
     Vertices[2] = Vector3f(1.0f, -1.0f, 0.5773f);
     Vertices[3] = Vector3f(0.0f, 1.0f, 0.0f);
-
-
-
 
 
  	glGenBuffers(1, &VBO);
@@ -162,12 +167,13 @@ void CompileShaders()
     }
 
     glUseProgram(ShaderProgram);
-        gWorldLocation = glGetUniformLocation(ShaderProgram, "gWorld");
-    assert(gWorldLocation != 0xFFFFFFFF);
+        gWVPLocation = glGetUniformLocation(ShaderProgram, "gWVP");
+    assert(gWVPLocation != 0xFFFFFFFF);
 }
 
-int main()
-{		GLFWwindow		*_window;
+int    main()
+{		
+    GLFWwindow		*_window;
 
 	if (!glfwInit())
 		throw DError() << msg("could not start GLFW3");
@@ -187,6 +193,7 @@ int main()
 	
 	glfwMakeContextCurrent(_window);
 	
+
 	glewExperimental = GL_TRUE;
 	glewInit();
 	
@@ -201,18 +208,25 @@ int main()
 
     CreateVertexBuffer();
     CreateIndexBuffer();
-    //glFrontFace(GL_CCW);
+
+    pGameCamera = new Cam(WINDOW_WIDTH, WINDOW_HEIGHT);
 
     CompileShaders();
     
     gPersProjInfo.FOV = 30.0f;
-    gPersProjInfo.Height = 1024;
-    gPersProjInfo.Width = 768;
+    gPersProjInfo.Height = WINDOW_HEIGHT;
+    gPersProjInfo.Width = WINDOW_WIDTH;
     gPersProjInfo.zNear = 0.1f;
     gPersProjInfo.zFar = 100.0f;
     
-    while (1)
+    while (!glfwWindowShouldClose (_window))
+    {
+
     	RenderSceneCB(_window);
+        glfwPollEvents ();
+        if (GLFW_PRESS == glfwGetKey (_window, GLFW_KEY_ESCAPE)) 
+            glfwSetWindowShouldClose (_window, 1);
+    }
  	glfwTerminate();
     return 0;
 }
