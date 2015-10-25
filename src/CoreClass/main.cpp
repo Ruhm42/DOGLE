@@ -29,9 +29,11 @@ void RenderSceneCB(GLFWwindow *_window)
     Pipeline p;
     p.Rotate(0.0f, Scale, 0.0f);
     p.WorldPos(0.0f, 0.0f, 3.0f);
+    
     Vector3f CameraPos(0.0f, 0.0f, -3.0f);
-    Vector3f CameraTarget(0.0f, 0.0f, 2.0f);
+    Vector3f CameraTarget(45, 0.0f, 1.0f);
     Vector3f CameraUp(0.0f, 1.0f, 0.0f);
+    
     p.SetCamera(*pGameCamera);
     p.SetPerspectiveProj(gPersProjInfo);
 
@@ -171,6 +173,12 @@ void CompileShaders()
     assert(gWVPLocation != 0xFFFFFFFF);
 }
 
+void        KeyState(GLFWwindow *window, int id)
+{
+    if (glfwGetKey(window, id) == GLFW_PRESS)
+        pGameCamera->OnKeyboard(id);
+}
+
 int    main()
 {		
     GLFWwindow		*_window;
@@ -224,6 +232,15 @@ int    main()
 
     	RenderSceneCB(_window);
         glfwPollEvents ();
+
+        KeyState(_window, GLFW_KEY_W);
+        KeyState(_window, GLFW_KEY_A);
+        KeyState(_window, GLFW_KEY_S);
+        KeyState(_window, GLFW_KEY_D);
+        KeyState(_window, GLFW_KEY_R);
+        KeyState(_window, GLFW_KEY_F);
+
+
         if (GLFW_PRESS == glfwGetKey (_window, GLFW_KEY_ESCAPE)) 
             glfwSetWindowShouldClose (_window, 1);
     }

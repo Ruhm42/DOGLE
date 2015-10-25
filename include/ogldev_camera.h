@@ -33,6 +33,7 @@ public:
     void OnMouse(int x, int y);
 
     void OnRender();
+    bool OnKeyboard(int Key);
 
     const Vector3f& GetPos() const
     {

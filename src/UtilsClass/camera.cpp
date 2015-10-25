@@ -16,9 +16,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "DOGLE.hpp"
 #include "ogldev_camera.h"
 
-//const static float STEP_SCALE = 1.0f;
+const static float STEP_SCALE = 1.0f;
 const static float EDGE_STEP = 0.5f;
 const static int MARGIN = 10;
 
@@ -91,6 +92,60 @@ void Cam::Init()
    // glutWarpPointer(m_mousePos.x, m_mousePos.y);
 }
 
+bool Cam::OnKeyboard(int Key)
+{
+    bool Ret = false;
+
+    switch (Key) {
+
+    case GLFW_KEY_W:
+        {
+            m_pos += (m_target * STEP_SCALE);
+            Ret = true;
+        }
+        break;
+
+    case GLFW_KEY_S:
+        {
+            m_pos -= (m_target * STEP_SCALE);
+            Ret = true;
+        }
+        break;
+
+    case GLFW_KEY_A:
+        {
+            Vector3f Left = m_target.Cross(m_up);
+            Left.Normalize();
+            Left *= STEP_SCALE;
+            m_pos += Left;
+            Ret = true;
+        }
+        break;
+
+    case GLFW_KEY_D:
+        {
+            Vector3f Right = m_up.Cross(m_target);
+            Right.Normalize();
+            Right *= STEP_SCALE;
+            m_pos += Right;
+            Ret = true;
+        }
+        break;
+        
+    case GLFW_KEY_R:
+        m_pos.y += STEP_SCALE;
+        break;
+    
+    case GLFW_KEY_F:
+        m_pos.y -= STEP_SCALE;
+        break;
+    
+    default:
+        break;            
+    }
+
+    return Ret;
+}
 
 void Cam::OnMouse(int x, int y)
 {
