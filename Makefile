@@ -3,34 +3,34 @@ NAME = dogle
 # SRC = 	example.cpp
 
 SRC = 	src/CoreClass/main.cpp \
-		src/CoreClass/Application.cpp \
-		src/CoreClass/Scene.cpp \
-		src/CoreClass/GameObject.cpp \
-		src/CoreClass/Transform.cpp \
-		src/CoreClass/Skin.cpp \
-		src/CoreClass/Camera.cpp \
-		src/CoreClass/Light.cpp \
-		src/CoreClass/Script.cpp \
+# 		src/CoreClass/Application.cpp \
+# 		src/CoreClass/Scene.cpp \
+# 		src/CoreClass/GameObject.cpp \
+# 		src/CoreClass/Transform.cpp \
+# 		src/CoreClass/Skin.cpp \
+# 		src/CoreClass/Camera.cpp \
+# 		src/CoreClass/Light.cpp \
+# 		src/CoreClass/Script.cpp \
 
-SRC +=	src/BuilderClass/ScriptFactory.cpp \
-		src/BuilderClass/Builder.cpp \
+# SRC +=	src/BuilderClass/ScriptFactory.cpp \
+# 		src/BuilderClass/Builder.cpp \
 
 SRC +=	src/UtilsClass/RGB.cpp \
 		src/UtilsClass/math_3d.cpp \
 		src/UtilsClass/camera.cpp \
 		src/UtilsClass/pipeline.cpp \
 
-SRC +=	src/EngineClass/Engine.cpp \
-		src/EngineClass/StateMachine.cpp \
-		src/EngineClass/Start.cpp \
-		src/EngineClass/Physics.cpp \
-		src/EngineClass/Inputs.cpp \
-		src/EngineClass/GameLogic.cpp \
-		src/EngineClass/Render.cpp \
-		src/EngineClass/Gui.cpp \
-		src/EngineClass/Pause.cpp \
-		src/EngineClass/Destroy.cpp \
-		src/EngineClass/Stop.cpp \
+# SRC +=	src/EngineClass/Engine.cpp \
+# 		src/EngineClass/StateMachine.cpp \
+# 		src/EngineClass/Start.cpp \
+# 		src/EngineClass/Physics.cpp \
+# 		src/EngineClass/Inputs.cpp \
+# 		src/EngineClass/GameLogic.cpp \
+# 		src/EngineClass/Render.cpp \
+# 		src/EngineClass/Gui.cpp \
+# 		src/EngineClass/Pause.cpp \
+# 		src/EngineClass/Destroy.cpp \
+# 		src/EngineClass/Stop.cpp \
 
 GAMESCRIPTS = resources/Scripts/GameScripts.a
 

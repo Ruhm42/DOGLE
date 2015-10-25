@@ -10,7 +10,30 @@ GLuint IBO;
 GLuint gWorldLocation;
 PersProjInfo gPersProjInfo;
 
+const char* pVSFileName = "shader.vs";
+const char* pFSFileName = "shader.fs";
 
+void RenderSceneCB(GLFWwindow *_window)
+{
+    glClear(GL_COLOR_BUFFER_BIT);
+
+
+    static float Scale = 0.0f;
+
+    Scale += 0.01f;
+
+    Pipeline p;
+    p.Rotate(0.0f, Scale, 0.0f);
+    p.WorldPos(0.0f, 0.0f, 5.0f);
+    p.SetPerspectiveProj(gPersProjInfo);
+
+    glUniformMatrix4fv(gWorldLocation, 1, GL_TRUE, (const GLfloat*)p.GetWPTrans());
+    
+    glBindVertexArray (VAO);
+    glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
+
+    glfwSwapBuffers(_window);
+}
 
 void CreateVertexBuffer()
 {
@@ -49,65 +72,6 @@ static void CreateIndexBuffer()
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices), Indices, GL_STATIC_DRAW);
 }
-
-
-
-
-
-
-
-
-const char* pVSFileName = "shader.vs";
-const char* pFSFileName = "shader.fs";
-
-void RenderSceneCB(GLFWwindow *_window)
-{
-    glClear(GL_COLOR_BUFFER_BIT);
-
-
-    static float Scale = 0.0f;
-
-    Scale += 0.01f;
-
-    Pipeline p;
-    p.Rotate(0.0f, Scale, 0.0f);
-    p.WorldPos(0.0f, 0.0f, 5.0f);
-    p.SetPerspectiveProj(gPersProjInfo);
-
-    glUniformMatrix4fv(gWorldLocation, 1, GL_TRUE, (const GLfloat*)p.GetWPTrans());
-
-
-
-    
-   	glBindVertexArray (VAO);
-
-
-
-    glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
-
-    glfwSwapBuffers(_window);
-
-}
-
-
-/*
-void CreateVertexBuffer()
-{
-    Vector3f Vertices[3];
-    Vertices[0] = Vector3f(-1.0f, -1.0f, 0.0f);
-    Vertices[1] = Vector3f(1.0f, -1.0f, 0.0f);
-    Vertices[2] = Vector3f(0.0f, 1.0f, 0.0f);
-
- 	glGenBuffers(1, &VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
-
-	glGenVertexArrays (1, &VAO);
-	glBindVertexArray (VAO);
-	glEnableVertexAttribArray (0);
-	glBindBuffer (GL_ARRAY_BUFFER, VBO);
-	glVertexAttribPointer (VBO, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-}*/
 
 void AddShader(GLuint ShaderProgram, const char* pShaderText, GLenum ShaderType)
 {
@@ -233,21 +197,20 @@ int main()
 	
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glfwWindowHint(GLFW_SAMPLES, 4);
-	
-
-
-
 
 
     CreateVertexBuffer();
     CreateIndexBuffer();
+    //glFrontFace(GL_CCW);
 
     CompileShaders();
-        gPersProjInfo.FOV = 30.0f;
-    gPersProjInfo.Height = 600;
-    gPersProjInfo.Width = 600;
-    gPersProjInfo.zNear = 1.0f;
+    
+    gPersProjInfo.FOV = 30.0f;
+    gPersProjInfo.Height = 1024;
+    gPersProjInfo.Width = 768;
+    gPersProjInfo.zNear = 0.1f;
     gPersProjInfo.zFar = 100.0f;
+    
     while (1)
     	RenderSceneCB(_window);
  	glfwTerminate();
